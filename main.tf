@@ -114,8 +114,3 @@ resource "aws_security_group" "vpc_ssh_icmp_echo_sg" {
     Name = aws_vpc.new_vpc.tags.Name
   }
 }
-
-# Lookup for all VPC route tables
-data "aws_route_tables" "route_tables" {
-  vpc_id = aws_vpc.new_vpc.id
-}
