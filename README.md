@@ -58,6 +58,3 @@ terraform apply
 | vpc_name | The name of the VPC
 | requester_subnet_ids | List VPC Subnet Ids
 | azs | List Availability Zones in which Subnet are created
-| route_tables_count | Count route tables per VPC
-
-  
