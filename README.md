@@ -1,4 +1,8 @@
-# Sample terraform configuration to create a VPC on AWS with one public and one or more private subnets
+# Terraform configuration to provision new VPC on AWS with one public and one or more private subnets with NAT Gateway
+
+## High Level Overview
+
+<img src="diagrams/aws-vpc-nat_gw.png" />
 
 ## Prerequisites
 
@@ -11,8 +15,8 @@
 - Get the repo
 
 ```
-git clone https://github.com/achuchulev/terraform-aws-vpc-public-private-subnets.git
-cd terraform-aws-vpc-public-private-subnets
+git clone https://github.com/achuchulev/terraform-aws-vpc-natgw.git
+cd terraform-aws-vpc-natgw
 ```
 
 - Create `terraform.tfvars` file
