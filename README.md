@@ -64,7 +64,7 @@ terraform apply
 | azs | List Availability Zones in which Subnet are created
 
 
-## Consume as module
+## Consume as a module
 
 ```
 #### variables.tf ####
