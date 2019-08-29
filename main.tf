@@ -34,12 +34,12 @@ resource "aws_eip" "nat_gw_ip" {
 # Create NAT GW for Private Subnets within VPC
 resource "aws_nat_gateway" "nat_gw" {
   allocation_id = aws_eip.nat_gw_ip.id
-  subnet_id     = aws_subnet.vpc_subnet[0].id // The Subnet ID of the subnet in which to place the gateway. In this case it will be always the first subnet
+  subnet_id     = aws_subnet.vpc_subnet[0].id # The Subnet ID of the subnet in which to place the gateway. In this case it will be always the first subnet
   depends_on    = ["aws_internet_gateway.vpc_internet_gw"]
 }
 
-# Create custom route table and route for Internet GW for the Public Subnet within VPC
-resource "aws_route_table" "custom" {
+# Create second route table and route for Internet GW for the Public Subnet within VPC
+resource "aws_route_table" "second" {
   vpc_id = aws_vpc.new_vpc.id
 
   route {
@@ -52,10 +52,10 @@ resource "aws_route_table" "custom" {
   }
 }
 
-# Assosiate custom route table with the Public Subnet
+# Assosiate second route table with the Public Subnet
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.vpc_subnet[0].id
-  route_table_id = "${aws_route_table.custom.id}"
+  route_table_id = "${aws_route_table.second.id}"
 }
 
 # Create route to NAT GW for Private Subnets
