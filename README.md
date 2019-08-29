@@ -1,4 +1,4 @@
-# Terraform configuration to provision new VPC on AWS with one public and one or more private subnets with NAT Gateway
+# Terraform code to provision new VPC on AWS with one public and one or more private subnets with NAT Gateway
 
 ## High Level Overview
 
@@ -62,3 +62,74 @@ terraform apply
 | vpc_name | The name of the VPC
 | requester_subnet_ids | List VPC Subnet Ids
 | azs | List Availability Zones in which Subnet are created
+
+
+## Consume
+
+```
+#### variables.tf ####
+
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
+variable "aws_region" {}
+
+variable "vpc_name" {
+  description = "Set a VPC name"
+  default     = ""
+}
+
+variable "vpc_cidr_block" {
+  description = "Define requester VPC cidr blocks"
+  default     = "10.200.0.0/16"
+}
+
+variable "vpc_subnet_cidr_blocks" {
+  type        = list(string)
+  description = "Define VPC subnet cidr blocks"
+  default     = ["10.200.0.0/24", "10.200.1.0/24"]
+}
+
+#### main.tf ####
+
+module "new_vpc" {
+  source = "git@github.com:achuchulev/terraform-aws-vpc-natgw.git"
+
+  aws_access_key = var.aws_access_key
+  aws_secret_key = var.aws_secret_key
+  aws_region     = var.aws_region
+
+  vpc_cidr_block         = var.vpc_cidr_block
+  vpc_subnet_cidr_blocks = var.vpc_subnet_cidr_blocks
+
+  vpc_tags = {
+    Name = var.vpc_name
+    Side = var.region
+  }
+}
+
+#### outputs.tf ####
+
+output "vpc_id" {
+  value = module.new_vpc.vpc_id
+}
+
+output "vpc_name" {
+  value = module.new_vpc.vpc_name
+}
+
+
+output "subnet_ids" {
+  value = module.new_vpc.subnet_ids
+}
+
+output "azs" {
+  value = module.new_vpc.azs
+}
+
+#### versions.tf ####
+
+terraform {
+  required_version = ">= 0.12"
+}
+
+```
