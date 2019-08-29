@@ -1,5 +1,9 @@
 # Terraform configuration to provision new VPC on AWS with one public and one or more private subnets with NAT Gateway
 
+## High Level Overview
+
+<img src="diagrams/aws-vpc-nat_gw.png" />
+
 ## Prerequisites
 
 - git
