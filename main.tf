@@ -67,7 +67,7 @@ resource "aws_route" "internet_access_throug_nat_gw" {
 
 # Assosiate main route tables with Private subnets
 resource "aws_route_table_association" "private" {
-  count          = (length(var.vpc_subnet_cidr_blocks) - 1)
+  count          = (length(aws_subnet.vpc_subnet) - 1)
   subnet_id      = aws_subnet.vpc_subnet[(count.index + 1)].id
   route_table_id = aws_vpc.new_vpc.main_route_table_id
 }
