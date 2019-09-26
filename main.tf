@@ -39,7 +39,7 @@ resource "aws_nat_gateway" "nat_gw" {
 }
 
 # Create second route table and route for Internet GW for the Public Subnet within VPC
-resource "aws_route_table" "second" {
+resource "aws_route_table" "public" {
   vpc_id = aws_vpc.new_vpc.id
 
   route {
@@ -55,7 +55,7 @@ resource "aws_route_table" "second" {
 # Assosiate second route table with the Public Subnet
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.vpc_subnet[0].id
-  route_table_id = "${aws_route_table.second.id}"
+  route_table_id = "${aws_route_table.public.id}"
 }
 
 # Create route to NAT GW for Private Subnets
