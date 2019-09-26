@@ -48,7 +48,7 @@ resource "aws_route_table" "second" {
   }
 
   tags = {
-    Name = "custom"
+    Name = "public"
   }
 }
 
