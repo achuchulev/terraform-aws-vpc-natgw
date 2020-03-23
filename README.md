@@ -2,7 +2,7 @@
 
 ## High Level Overview
 
-<img src="diagrams/aws-vpc-nat_gw.png" />
+<img src="diagrams/AWS-VPC-NatGW.png" />
 
 ## Prerequisites
 
